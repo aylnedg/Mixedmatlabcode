@@ -1,0 +1,76 @@
+% control introduction
+
+
+% pay (num)=0 --> zero
+% payda (dem)=0 --> pole
+
+% zero-pole mapta sağ (+) eksende pole varsa sistem --> unstable (kararsız)
+%zero-pole mapta,  zero --> steady state durumundaki overshootları yani steady state durumuna geçerken sinyalin yaptığı hareketlere bakar, yani sistemin stabilitesine etki etmez 
+
+% y(t)=(e^-a*t)*u(t) -->laplace dönüşümü  y(s)= 1/(s+a)
+% s+a=0 --> s=-a
+% tau[saniye],sinyalin steady state durumuna kadar geçen süre
+%tau= zero-pole mapin pole'nin gerçek değeri belirler
+
+% e^(q+jw) --> (e^-a*t) ---> tau=1/a  
+% a artarsa tau azalır yani steady state hale geçme süresi kısalır.
+
+t=0:0.2:20; 
+a=1;
+y=exp(-a.*t); % y(t)=(e^-a*t)
+plot(t,y); % y(t) grafiğini çizdir
+xlabel('zaman(t)');
+ylabel('y(t)');
+hold on
+a=2;
+y=exp(-a.*t); % y(t)=(e^-a*t)
+plot(t,y); % y(t) grafiğini çizdir
+legend('a=1' , 'a=2');
+                    % steady state
+%a=1 iken tau=1 --> (6*tau=)t=6 sn
+%a=2 iken tau=0.5 --> (6*tau=) t=3sn
+
+
+%*********************************************
+
+%transfer function
+num=[2 -2];
+den=[1 -2 0 16];  %pole sağda olduğu için sistem unstable
+y=tf(num,den);
+ylabel('y(s)');
+title('sistemin frekans cevabi');
+axis([0 100 0 6*(10^25)]);
+step(y);
+
+% y= (2s-2)/(s^3-2s^2+16)
+
+
+%*********************************************
+
+%f(t)=(e^-2*t)*cos(4t)
+% L{f(t)}=F(s)
+%F(s)? laplace /(ters laplace
+
+syms L f t; % sembolik değişken tanımla L->laplace ,f->fonksiyon , t-> t domaini
+f=exp(-2*t)*cos(4*t);
+L=laplace(f);
+ilaplace(L); % ters laplace
+
+%ters laplace
+syms F s ;
+F=2/(s+3);
+f=ilaplace(F);
+
+%*********************************************
+
+% risetime (tr) : (wn(doğal frekans) artarsa ,tr azalır) sinyalin final değerinin %90unun
+% zamanı (yükseliş zamanı)
+
+zeta=0.3; %sönümleme oranı
+wn=1; %doğal frekans
+y=tf([wn],[1 2*zeta*wn wn]);
+step(y); %step response
+%rise time azalınca daha hızlı bir referansa oturma cevabı alırız (zeta
+%sabitken)
+
+

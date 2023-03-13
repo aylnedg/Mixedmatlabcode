@@ -1,0 +1,39 @@
+% while yapısı
+
+% while (şartlı durum)
+%   işlemler
+% end
+
+%1 snde bir ekrana 10 tane work yazdır
+a=0;
+while a<10
+    disp('work');
+    a=a+1;
+    pause(1);
+end
+
+
+% while 1 --> sonsuz döngü oluşturur
+
+
+%***********************************************
+
+% 1'den 10 a kadar olan sayıların toplamı
+toplam=0;
+sayi=1;
+while sayi<11
+    toplam=toplam+sayi;
+    sayi=sayi+1;
+end
+disp('toplam sonuc:');
+disp(toplam);
+
+%***********************************************
+
+
+%kullanıcı klavyeden bir sayı gir, sayı 5-10 arasında ise ekrana doğru
+%seçim yazdır , sayı 5-10 arasında değilse hata mesajı ekrana yazdır
+
+while
+    x=input('bir sayi gir:');
+    if (x>=5)&&(x<
